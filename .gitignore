@@ -1,1 +1,4 @@
 .vscode/launch.json
+prometheus/prometheus.yml
+grafana/config.monitoring
+grafana/provisioning/*
