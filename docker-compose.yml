@@ -46,8 +46,6 @@ services:
     networks:
       - back-tier
     restart: always
-    deploy:
-      mode: global
 
   cadvisor:
     image: google/cadvisor
@@ -61,8 +59,6 @@ services:
     networks:
       - back-tier
     restart: always
-    deploy:
-      mode: global
 
   grafana:
     image: grafana/grafana
@@ -85,8 +81,8 @@ services:
     depends_on:
       - grafana
     ports:
-      - "80"
-      - "443"
+      - 80:80
+      - 443:443
     volumes:
       - ./nginx/nginx.config:/etc/nginx/nginx.config
       - /etc/letsencrypt/certs:/etc/letsencrypt/certs:ro
