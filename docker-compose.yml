@@ -70,7 +70,7 @@ services:
     depends_on:
       - prometheus
     ports:
-      - 80:3000
+      - 3000:3000
     volumes:
       - grafana_data:/var/lib/grafana
       - ./grafana/provisioning/:/etc/grafana/provisioning/
@@ -78,5 +78,19 @@ services:
       - ./grafana/config.monitoring
     networks:
       - back-tier
-      - front-tier
     restart: always
+
+  nginx:
+    image: nginx:stable-alpine
+    depends_on:
+      - grafana
+    ports:
+      - "80"
+      - "443"
+    volumes:
+      - ./nginx/nginx.config:/etc/nginx/nginx.config
+      - /etc/letsencrypt/certs:/etc/letsencrypt/certs:ro
+      - /etc/letsencrypt/keys:/etc/letsencrypt/keys:ro
+    networks:
+      - back-tier
+      - front-tier
