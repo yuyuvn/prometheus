@@ -84,7 +84,7 @@ services:
       - 80:80
       - 443:443
     volumes:
-      - ./nginx/nginx.config:/etc/nginx/nginx.config
+      - ./nginx/conf.d:/etc/nginx/conf.d
       - /etc/letsencrypt/certs:/etc/letsencrypt/certs:ro
       - /etc/letsencrypt/keys:/etc/letsencrypt/keys:ro
     networks:
